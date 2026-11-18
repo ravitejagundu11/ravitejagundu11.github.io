@@ -199,6 +199,107 @@
     <section id="projects" class="section">
       <div class="container">
         <h2 class="section-title"><span>03.</span> Projects</h2>
+
+        <h3 class="subhead">From my work</h3>
+        <div class="cards">
+          <article class="card">
+            <div class="card-top"><span class="card-year">Amazon Web Services &middot; 2026</span></div>
+            <h3>Cable-Management Workflow for Data-Center Install Engineers</h3>
+            <p class="result"><span>Result</span>Cable changes take under 15 seconds instead of 2 minutes. During my internship, 20% of edits were blocked as stale instead of silently overwriting data. It went from domain ramp-up to production launch in 8 weeks.</p>
+            <details class="more">
+              <summary>How I built it</summary>
+              <dl class="case">
+                <dt>Problem</dt>
+                <dd>Install engineers spent about 2 minutes on each cable change in the old system, and nothing stopped two people from saving over each other's edits.</dd>
+                <dt>What I built</dt>
+                <dd>A new UI and two core APIs, built in Java on AWS Lambda with GraphQL and React. Atomic jOOQ transactions and a DynamoDB lock table catch stale edits. Everything shipped behind a feature flag so selected users could test it in pre-production, and CloudWatch dashboards track latency, error rates and adoption.</dd>
+              </dl>
+            </details>
+            <ul class="tags"><li>Java</li><li>GraphQL</li><li>React</li><li>AWS Lambda</li><li>jOOQ</li><li>DynamoDB</li><li>CloudWatch</li></ul>
+          </article>
+
+          <article class="card">
+            <div class="card-top"><span class="card-year">Sureify</span></div>
+            <h3>Instant Document Signing Status</h3>
+            <p class="result"><span>Result</span>Signing status updates instantly, response time dropped by 5 seconds, peak server load fell 30%, and the server no longer spikes under heavy load.</p>
+            <details class="more">
+              <summary>How I built it</summary>
+              <dl class="case">
+                <dt>Problem</dt>
+                <dd>A cron job polled DocuSign for document status. It used a lot of resources, crashed the server a few times under heavy load, and left other teams' apps showing long loading spinners after a customer signed.</dd>
+                <dt>What I built</dt>
+                <dd>A webhook that DocuSign calls when it finishes an envelope. API Gateway pushes each event to SQS and returns right away, and a Go consumer updates the document workflow. I added exponential-backoff retries for DocuSign and Adobe Sign calls and for the SNS and SQS consumers.</dd>
+              </dl>
+            </details>
+            <ul class="tags"><li>Go</li><li>API Gateway</li><li>SQS</li><li>SNS</li><li>Webhooks</li><li>DocuSign</li></ul>
+          </article>
+
+          <article class="card">
+            <div class="card-top"><span class="card-year">Sureify</span></div>
+            <h3>PDF Form Fields Without a Paid License</h3>
+            <p class="result"><span>Result</span>We met the customer deadline without buying a license. Because it runs as its own Lambda, any service can call it, whatever language it's written in.</p>
+            <details class="more">
+              <summary>How I built it</summary>
+              <dl class="case">
+                <dt>Problem</dt>
+                <dd>A customer deadline needed form fields added to documents on the fly. Go's PDF libraries couldn't do it, and the paid alternative charged per-node licenses.</dd>
+                <dt>What I built</dt>
+                <dd>After comparing alternatives, I built a proof of concept in Python on AWS Lambda that the e-signature service calls to add the fields, then covered it with Python unit tests.</dd>
+              </dl>
+            </details>
+            <ul class="tags"><li>Python</li><li>AWS Lambda</li><li>Serverless</li><li>PDF processing</li></ul>
+          </article>
+
+          <article class="card">
+            <div class="card-top"><span class="card-year">Sureify</span></div>
+            <h3>Easy Signature: E-Signature Service</h3>
+            <p class="result"><span>Result</span>One shared signing service runs inside every product, configured per client, with no manual upload step for signed documents.</p>
+            <details class="more">
+              <summary>How I built it</summary>
+              <dl class="case">
+                <dt>Problem</dt>
+                <dd>Every insurance product Sureify built for clients such as Amica, AAA, Kuvare and Navy Mutual ends with customers signing their quote or application. Each client has its own DocuSign account and settings.</dd>
+                <dt>What I built</dt>
+                <dd>A Go (Beego) microservice with REST integrations for DocuSign and Adobe Sign, supporting single- and multi-signatory signing and uploading signed documents automatically through webhooks. A React and TypeScript admin dashboard (Material UI) manages each client's settings, and Playwright tests check the signing integrations end to end.</dd>
+              </dl>
+            </details>
+            <ul class="tags"><li>Go</li><li>Beego</li><li>DocuSign</li><li>Adobe Sign</li><li>React</li><li>TypeScript</li><li>Playwright</li></ul>
+          </article>
+
+          <article class="card">
+            <div class="card-top"><span class="card-year">Sureify</span></div>
+            <h3>Identity Service and Single Sign-On</h3>
+            <p class="result"><span>Result</span>Client applications share one login across products, and service endpoints only run operations that the caller's persona allows.</p>
+            <details class="more">
+              <summary>How I built it</summary>
+              <dl class="case">
+                <dt>Problem</dt>
+                <dd>Several web applications needed shared login, logout and resource sharing, and clients wanted their users to sign in through the identity providers they already used.</dd>
+                <dt>What I built</dt>
+                <dd>An in-house authentication and authorization service with SSO through AWS Cognito, Azure and Okta, using OAuth, OIDC, SAML and JWT. User personas are encoded in JWE tokens, and every request is authenticated and validated before it runs.</dd>
+              </dl>
+            </details>
+            <ul class="tags"><li>OAuth 2.0</li><li>OIDC</li><li>SAML</li><li>JWT / JWE</li><li>Cognito</li><li>Okta</li></ul>
+          </article>
+
+          <article class="card">
+            <div class="card-top"><span class="card-year">Medtronic &middot; 2025</span></div>
+            <h3>JFrog Cost Visibility</h3>
+            <p class="result"><span>Result</span>Teams can now see their own usage trends and spend, which helped them find where to cut costs.</p>
+            <details class="more">
+              <summary>How I built it</summary>
+              <dl class="case">
+                <dt>Problem</dt>
+                <dd>Engineering teams across Medtronic's business verticals use JFrog, but couldn't see how much each vertical or team was spending.</dd>
+                <dt>What I built</dt>
+                <dd>A Go backend that reads JFrog logs, parses them into InfluxDB, and feeds Grafana dashboards showing cost per vertical and per team.</dd>
+              </dl>
+            </details>
+            <ul class="tags"><li>Go</li><li>InfluxDB</li><li>Grafana</li><li>Docker</li></ul>
+          </article>
+        </div>
+
+        <h3 class="subhead">Personal and academic</h3>
         <div class="cards">
           <article class="card">
             <div class="card-top">
@@ -207,12 +308,15 @@
             </div>
             <h3>CampusSync</h3>
             <p>A campus study and meeting room reservation app built by a 4-person team at Purdue: room search and availability, bookings, and admin management of rooms and reservations.</p>
-            <ul class="bullets">
+            <details class="more">
+              <summary>What I did</summary>
+              <ul class="bullets">
               <li>Scaffolded the Express + TypeScript backend and the React + Vite + Tailwind frontend.</li>
               <li>Built JWT login, logout and session endpoints with auth middleware and structured request logging, plus the frontend login flow and protected routes.</li>
               <li>Moved auth to PostgreSQL with Drizzle ORM migrations and wrote an exclusion constraint that blocks overlapping reservations for the same room.</li>
               <li>Set up Docker Compose for local Postgres and a dedicated test database for integration tests.</li>
             </ul>
+            </details>
             <ul class="tags">
               <li>TypeScript</li><li>Node.js</li><li>Express</li><li>PostgreSQL</li><li>React</li><li>Vitest</li>
             </ul>
@@ -225,11 +329,14 @@
             </div>
             <h3>AI-Powered Personal Color Analysis</h3>
             <p>A full-stack ML app that predicts a person's seasonal color profile from a photo, built for Purdue's Career Closet.</p>
-            <ul class="bullets">
+            <details class="more">
+              <summary>What I did</summary>
+              <ul class="bullets">
               <li>Fine-tuned a ResNet50 classifier on the Deep Armocromia dataset, reaching 83% Top-2 color season accuracy.</li>
               <li>Built an end-to-end inference pipeline that segments skin with Rembg and serves real-time predictions through FastAPI.</li>
               <li>Gathered requirements with the Career Closet director and integrated the model into their existing website by the end of the semester.</li>
             </ul>
+            </details>
             <ul class="tags">
               <li>Python</li><li>PyTorch</li><li>ResNet50</li><li>FastAPI</li><li>Rembg</li>
             </ul>
