@@ -210,7 +210,7 @@
               <summary>How I built it</summary>
               <dl class="case">
                 <dt>Problem</dt>
-                <dd>Install engineers spent about 2 minutes on each cable change in the old system, and nothing stopped two people from saving over each other's edits.</dd>
+                <dd>Install engineers spent about 2 minutes on each cable change in the old system, and without a check, stale data could be saved over newer edits.</dd>
                 <dt>What I built</dt>
                 <dd>A new UI and two core APIs, built in Java on AWS Lambda with GraphQL and React. Atomic jOOQ transactions and a DynamoDB lock table catch stale edits. Everything shipped behind a feature flag so selected users could test it in pre-production, and CloudWatch dashboards track latency, error rates and adoption.</dd>
               </dl>
@@ -253,7 +253,7 @@
           <article class="card">
             <div class="card-top"><span class="card-year">Sureify</span></div>
             <h3>Easy Signature: E-Signature Service</h3>
-            <p class="result"><span>Result</span>One shared signing service runs inside every product, configured per client, with no manual upload step for signed documents.</p>
+            <p class="result"><span>Result</span>One shared signing service runs inside every product, configured per client, with less manual work to handle signed documents.</p>
             <details class="more">
               <summary>How I built it</summary>
               <dl class="case">
@@ -269,12 +269,12 @@
           <article class="card">
             <div class="card-top"><span class="card-year">Sureify</span></div>
             <h3>Identity Service and Single Sign-On</h3>
-            <p class="result"><span>Result</span>Client applications share one login across products, and service endpoints only run operations that the caller's persona allows.</p>
+            <p class="result"><span>Result</span>Users get one login across multiple web applications, and every endpoint confirms who the caller is before running anything.</p>
             <details class="more">
               <summary>How I built it</summary>
               <dl class="case">
                 <dt>Problem</dt>
-                <dd>Several web applications needed shared login, logout and resource sharing, and clients wanted their users to sign in through the identity providers they already used.</dd>
+                <dd>Several web applications needed shared login, logout and resource sharing, and client applications needed single sign-on through third-party identity providers.</dd>
                 <dt>What I built</dt>
                 <dd>An in-house authentication and authorization service with SSO through AWS Cognito, Azure and Okta, using OAuth, OIDC, SAML and JWT. User personas are encoded in JWE tokens, and every request is authenticated and validated before it runs.</dd>
               </dl>
@@ -285,17 +285,17 @@
           <article class="card">
             <div class="card-top"><span class="card-year">Medtronic &middot; 2025</span></div>
             <h3>JFrog Cost Visibility</h3>
-            <p class="result"><span>Result</span>Teams can now see their own usage trends and spend, which helped them find where to cut costs.</p>
+            <p class="result"><span>Result</span>Engineering teams got visibility into their usage trends and spend, which helped the team find ways to reduce costs.</p>
             <details class="more">
               <summary>How I built it</summary>
               <dl class="case">
                 <dt>Problem</dt>
-                <dd>Engineering teams across Medtronic's business verticals use JFrog, but couldn't see how much each vertical or team was spending.</dd>
+                <dd>Engineering teams across Medtronic's business verticals use JFrog, and needed to see how much each vertical and team was spending.</dd>
                 <dt>What I built</dt>
                 <dd>A Go backend that reads JFrog logs, parses them into InfluxDB, and feeds Grafana dashboards showing cost per vertical and per team.</dd>
               </dl>
             </details>
-            <ul class="tags"><li>Go</li><li>InfluxDB</li><li>Grafana</li><li>Docker</li></ul>
+            <ul class="tags"><li>Go</li><li>InfluxDB</li><li>Grafana</li></ul>
           </article>
         </div>
 
